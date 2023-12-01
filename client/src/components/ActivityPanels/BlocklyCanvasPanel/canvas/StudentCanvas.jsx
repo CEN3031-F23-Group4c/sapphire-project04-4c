@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useReducer } from 'react';
 import '../../ActivityLevels.less';
 import { compileArduinoCode, handleSave } from '../../Utils/helpers';
 import { message, Spin, Row, Col, Alert, Dropdown, Menu } from 'antd';
-import { getSaves, getSave, getActivity } from '../../../../Utils/requests';
+import { getSaves, updateStudentGrade, getActivity } from '../../../../Utils/requests';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
 import PlotterModal from '../modals/PlotterModal';
@@ -249,29 +249,95 @@ export default function StudentCanvas({ activity }) {
 
         let minLength = 0
 
-        if(saveString.length > gradeTemplate.length){
-          minLength = gradeTemplate.length
-          length += saveString.length - gradeTemplate.length
-        }
-        else{
-          minLength = saveString.length
-          length += gradeTemplate.length - saveString.length
+        let saveAdjustArray = []
+        let gradeAdjustArray = []
+
+        //adjusts save and grade strings to account for ids and x and y positions
+        for(let i = 0; i < saveString.length; i++){
+          if(saveString[i] == 'x' && i != saveString.length - 2){
+            if(saveString[i+1] == '='){
+              while(saveString[i] != ' ' && saveString[i] != '>'){
+                i++;
+              }
+            }
+          }
+          if(saveString[i] == 'y' && i != saveString.length - 2){
+            if(saveString[i+1] == '='){
+              while(saveString[i] != ' ' && saveString[i] != '>'){
+                i++;
+              }
+            }
+          }
+          if(saveString[i] == 'i' && i != saveString.length - 3){
+            if(saveString[i+1] == 'd' && saveString[i+2] == '='){
+              while(saveString[i] != ' ' && saveString[i] != '>'){
+                i++;
+              }
+            }
+          }
+          saveAdjustArray.push(saveString[i]);
         }
 
-       for(let i = 0; i < minLength; i++){
-          if(saveString[i] == gradeTemplate[i]){
+        for(let i = 0; i < gradeTemplate.length; i++){
+          if(gradeTemplate[i] == 'x' && i != gradeTemplate.length - 2){
+            if(gradeTemplate[i+1] == '='){
+              while(gradeTemplate[i] != ' ' && gradeTemplate[i] != '>'){
+                i++;
+              }
+            }
+          }
+          if(gradeTemplate[i] == 'y' && i != gradeTemplate.length - 2){
+            if(gradeTemplate[i+1] == '='){
+              while(gradeTemplate[i] != ' ' && gradeTemplate[i] != '>'){
+                i++;
+              }
+            }
+          }
+          if(gradeTemplate[i] == 'i' && i != gradeTemplate.length - 3){
+            if(gradeTemplate[i+1] == 'd' && gradeTemplate[i+2] == '='){
+              while(gradeTemplate[i] != ' ' && gradeTemplate[i] != '>'){
+                i++;
+              }
+            }
+          }
+          gradeAdjustArray.push(gradeTemplate[i]);
+        }
+
+      var gradeAdjustString = gradeAdjustArray.join("")
+      var saveAdjustString = saveAdjustArray.join("")
+
+      if(gradeAdjustString.length == saveAdjustString.length){
+        for(let i = 0; i < gradeAdjustString.length; i++){
+          if(saveAdjustString[i] == gradeAdjustString[i]){
             hits++
           }
 
           length++
         }
+      }
 
-        message.success('Got a ' + hits/length * 100 +'% according to AutoGrade')
+        if(hits/length == 1.0){
+          message.success("Your submission matches the teacher's template! You got a 100!");
+          const userId = JSON.parse(sessionStorage.getItem('user'))[0];
+          const grade_in_class = {grade_in_class: "100"};
+          updateStudentGrade(userId, grade_in_class);
+        }
+        else{
+          message.info("Your submission doesn't match the teacher's, but it still may be correct. Feedback has been requested!");
+          const userId = JSON.parse(sessionStorage.getItem('user'))[0];
+          const grade_in_class = {grade_in_class: "0"};
+          updateStudentGrade(userId, grade_in_class);
+          handleRequestFeedback();
+        }
     }
     else{
       message.error('Autograde not enabled!')
     }
   }
+
+  const handleRequestFeedback = () => {
+
+  };
   
   const handleRedo = () => {
     if (workspaceRef.current.redoStack_.length > 0) {

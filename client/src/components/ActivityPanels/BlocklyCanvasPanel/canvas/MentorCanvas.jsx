@@ -261,7 +261,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
       if (res.err) {
         message.error(res.err);
       } else {
-        message.success('Activity template saved successfully');
+        message.success('Activity grade template saved successfully');
       }
     } else {
       // if we already have the workspace in the db, just update it.
@@ -447,7 +447,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
             <div id='blockly-canvas' />
           </Spin>
           </div>
-           {!isSandbox && !isMentorActivity && (
+           {!isSandbox && !isMentorActivity && !isGradeActivity && (
           <StudentToolboxMenu
             activity={activity}
             studentToolbox={studentToolbox}

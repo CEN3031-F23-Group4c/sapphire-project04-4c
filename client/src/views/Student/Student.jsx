@@ -8,6 +8,7 @@ import './Student.less';
 function Student() {
   const [learningStandard, setLessonModule] = useState({});
   const navigate = useNavigate();
+  var studentId;
 
   useEffect(() => {
     const fetchData = async () => {

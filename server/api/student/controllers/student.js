@@ -60,6 +60,33 @@ module.exports = {
         return sanitizeEntity(updatedStudent, {model: strapi.models.student})
     },
 
+    async grade_in_class(ctx) {
+        // ensure request was not sent as formdata
+        if (ctx.is('multipart')) return ctx.badRequest(
+            'Multipart requests are not accepted!',
+            {id: 'Student.enrolled.format.invalid', error: 'ValidationError'}
+        )
+
+        // ensure the request has the right number of params
+        const params = Object.keys(ctx.request.body).length
+        if (params !== 1) return ctx.badRequest(
+            'Invalid number of params!',
+            {id: 'Student.enrolled.body.invalid', error: 'ValidationError'}
+        )
+
+        // find student
+        const {id} = ctx.params
+        let student = await strapi.services.student.findOne({id: id})
+        if (!student) return ctx.notFound(
+            'The student id provided does not correspond to a valid student!',
+            {id: 'Student.enrolled.id.invalid', error: 'ValidationError'}
+        )
+
+        student.grade_in_class = ctx.request.body.grade_in_class
+        const updatedStudent = await strapi.services.student.update({id: id}, student)
+        return sanitizeEntity(updatedStudent, {model: strapi.models.student})
+    },
+
     async create(ctx) {
         const {students, classroom} = ctx.request.body
 

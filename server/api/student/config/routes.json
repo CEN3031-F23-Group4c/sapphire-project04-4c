@@ -63,6 +63,14 @@
       "config": {
         "policies": ["global::isClassroomManager", "global::hasStudentsClassroom"]
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/students/grade_in_class/:id",
+      "handler": "student.grade_in_class",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

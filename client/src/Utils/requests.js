@@ -189,6 +189,15 @@ export const updateStudent = async (id, student) =>
     error: 'Failed to update student.',
   });
 
+  export const updateStudentGrade = async (id, grade_in_class) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/students/grade_in_class/${id}`,
+    data: grade_in_class,
+    auth: true,
+    error: 'Failed to update student grade.',
+  });
+
 export const getUnits = async (id) =>
   makeRequest({
     method: GET,

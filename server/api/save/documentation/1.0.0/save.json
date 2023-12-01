@@ -681,6 +681,9 @@
               "last_logged_in": {
                 "type": "string"
               },
+              "grade_in_class": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
