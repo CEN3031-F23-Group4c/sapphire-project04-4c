@@ -60,6 +60,8 @@ module.exports = {
         return sanitizeEntity(updatedStudent, {model: strapi.models.student})
     },
 
+
+    //Updates the students grade_in_class in order the database.
     async grade_in_class(ctx) {
         // ensure request was not sent as formdata
         if (ctx.is('multipart')) return ctx.badRequest(

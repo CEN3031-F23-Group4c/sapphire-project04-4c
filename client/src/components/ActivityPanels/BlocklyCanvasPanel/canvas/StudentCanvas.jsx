@@ -316,12 +316,14 @@ export default function StudentCanvas({ activity }) {
         }
       }
 
+        //If the strings are the same its sent to the server
         if(hits/length == 1.0){
           message.success("Your submission matches the teacher's template! You got a 100!");
           const userId = JSON.parse(sessionStorage.getItem('user'))[0];
           const grade_in_class = {grade_in_class: "100"};
           updateStudentGrade(userId, grade_in_class);
         }
+        //If not a 0 is sent to the server
         else{
           message.info("Your submission doesn't match the teacher's, but it still may be correct. Feedback has been requested!");
           const userId = JSON.parse(sessionStorage.getItem('user'))[0];
@@ -336,7 +338,7 @@ export default function StudentCanvas({ activity }) {
   }
 
   const handleRequestFeedback = () => {
-
+    //To be coded upon integration with the feedback system.
   };
   
   const handleRedo = () => {

@@ -189,6 +189,7 @@ export const updateStudent = async (id, student) =>
     error: 'Failed to update student.',
   });
 
+  //Sends a PUT request to the server.
   export const updateStudentGrade = async (id, grade_in_class) =>
   makeRequest({
     method: PUT,
