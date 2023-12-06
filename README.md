@@ -25,4 +25,8 @@
 -Outstanding Work
   - Integration with the main branch along with the feedback feature.
 
+-Manual Grading (Jose Castro)
+  <img width="1283" alt="Screen Shot 2023-12-05 at 10 22 11 PM" src="https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/73858107/d72926f0-8d36-48b9-86ed-469beed0af63">
+
+
 
