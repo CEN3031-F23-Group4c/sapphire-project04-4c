@@ -37,5 +37,7 @@
 # Manual Grading (Merged into `develop` branch)
   - ![Screen Shot 2023-12-05 at 10 22 11 PM](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/73858107/d72926f0-8d36-48b9-86ed-469beed0af63)
 
+# Automatic Code Compilation (Merged into `develop` branch)
+![Screenshot (85)](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/100625630/36f314a3-d404-42e8-a7cc-a72585108bdf)
 
 
