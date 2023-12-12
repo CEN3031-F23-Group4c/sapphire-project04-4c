@@ -41,6 +41,19 @@
 ![Screenshot (85)](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/100625630/36f314a3-d404-42e8-a7cc-a72585108bdf)
 
 # Display Student Grade&Feedback (Current on local branch)
+- This feature is to display student's grade and feedback on student's side
+- Function to fetch student data from gradesData.json file, include date, assignment name, student's grade and teacher feedback.
+- Also insert the data into the table.
+![indi1](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/92874121/92fb16df-8716-49b3-ad3f-8bd2555d7f79)
+- Content of gradesData.json file
+![indi2](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/92874121/1ce66cc6-a9d8-4ff7-9128-050b33de630b)
+- Html create grade&feedback table header and onclick 'grade' button.
+![indi3](https://github.com/CEN3031-F23-Group4c/sapphire-project04-4c/assets/92874121/f29b53b8-818f-45c9-9d46-c51ef26e21e5)
+
+
+
+
+
 
 
 
